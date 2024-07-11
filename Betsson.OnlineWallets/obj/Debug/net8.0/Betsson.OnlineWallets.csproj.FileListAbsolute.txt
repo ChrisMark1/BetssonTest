@@ -1,0 +1,16 @@
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\bin\Debug\net8.0\Betsson.OnlineWallets.deps.json
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\bin\Debug\net8.0\Betsson.OnlineWallets.dll
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\bin\Debug\net8.0\Betsson.OnlineWallets.pdb
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\bin\Debug\net8.0\Betsson.OnlineWallets.Data.dll
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\bin\Debug\net8.0\Betsson.OnlineWallets.Data.pdb
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson.OnlineWallets.csproj.AssemblyReference.cache
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson.OnlineWallets.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson.OnlineWallets.AssemblyInfoInputs.cache
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson.OnlineWallets.AssemblyInfo.cs
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson.OnlineWallets.csproj.CoreCompileInputs.cache
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson.OnlineWallets.sourcelink.json
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson..2CA24A6A.Up2Date
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson.OnlineWallets.dll
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\refint\Betsson.OnlineWallets.dll
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\Betsson.OnlineWallets.pdb
+C:\Users\Chris\Desktop\Betsson\src\Betsson.OnlineWallets\obj\Debug\net8.0\ref\Betsson.OnlineWallets.dll
