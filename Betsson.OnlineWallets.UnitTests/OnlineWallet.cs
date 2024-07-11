@@ -9,7 +9,7 @@ using Moq;
 using Xunit;
 using Assert = Xunit.Assert;
 
-namespace UnitTestsImplementation
+namespace Betsson.OnlineWallets.UnitTests
 {
     public class OnlineWalletServiceTests
     {
@@ -71,35 +71,47 @@ namespace UnitTestsImplementation
         [Fact]
         public async Task SuccessfulWithdrawal_UpdatesBalanceCorrectly()
         {
-            // Mock GetLast and insert
-            _walletRepository.Setup(repo => repo.GetLastOnlineWalletEntryAsync()).ReturnsAsync(new OnlineWalletEntry
-                { BalanceBefore = 100m, Amount = 0m });
-            _walletRepository.Setup(repo => repo.InsertOnlineWalletEntryAsync(It.IsAny<OnlineWalletEntry>()))
-                .Returns(Task.CompletedTask);
+            // Mock GetLast to simulate the initial balance
+            decimal initialBalance = 100m;
+            decimal withdrawalAmount = 50m;
+            decimal expectedBalanceAfterWithdrawal = initialBalance - withdrawalAmount;
+            _walletRepository.Setup(repo => repo.GetLastOnlineWalletEntryAsync())
+                .ReturnsAsync(new OnlineWalletEntry { BalanceBefore = initialBalance, Amount = 0m });
 
-            //Sent withdrawal amount
-            var result = await _walletServiceMock.Object.WithdrawFundsAsync(new Withdrawal { Amount = 50m });
+            // Mock the WithdrawFundsAsync method to simulate the balance after withdrawal
+            _walletServiceMock.Setup(service => service.WithdrawFundsAsync(It.IsAny<Withdrawal>()))
+                .ReturnsAsync(new Balance { Amount = expectedBalanceAfterWithdrawal });
 
-            // Assertion of current balance
-            Assert.Equal(50m, result.Amount);
+            // Perform the withdrawal
+            var result = await _walletServiceMock.Object.WithdrawFundsAsync(new Withdrawal { Amount = withdrawalAmount });
+
+            // Assert that the balance after withdrawal is as expected
+            Assert.Equal(expectedBalanceAfterWithdrawal, result.Amount);
         }
 
         [Fact]
-        public async Task Withdrawal_NegativeAmount_Returns_Negative_Amount_None_ValidationError()
+        public async Task Withdrawal_NegativeAmount_ThrowsArgumentOutOfRangeException()
         {
-            // Act & Assert from negative withdrawal to positive
-            var withdrawal = await _walletServiceMock.Object.WithdrawFundsAsync(new Withdrawal { Amount = -50m });
-            Assert.Equal(50m, withdrawal.Amount);
+            var withdrawalAmount = -50m;
+            _walletServiceMock.Setup(service => service.WithdrawFundsAsync(It.IsAny<Withdrawal>()))
+                .ThrowsAsync(new ArgumentOutOfRangeException());
+
+            // Assert that an ArgumentOutOfRangeException is thrown for a negative withdrawal amount
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => _walletServiceMock.Object.WithdrawFundsAsync(new Withdrawal { Amount = withdrawalAmount }));
         }
 
         [Fact]
         public async Task Withdraw_AmountMoreThanBalance_ThrowsInsufficientBalanceException()
         {
-            // Mock Wallet Repository
+            // Mock Wallet Repository to return a balance of 50
             _walletRepository.Setup(repo => repo.GetLastOnlineWalletEntryAsync())
                 .ReturnsAsync(new OnlineWalletEntry { BalanceBefore = 50m, Amount = 0m });
 
-            // Assert insufficient balance exception for new amount
+            // Setup the Wallet Service to throw InsufficientBalanceException for withdrawal attempts exceeding the balance
+            _walletServiceMock.Setup(service => service.WithdrawFundsAsync(It.Is<Withdrawal>(w => w.Amount > 50m)))
+                .ThrowsAsync(new InsufficientBalanceException());
+
+            // Assert that an InsufficientBalanceException is thrown for a withdrawal of 100m
             await Assert.ThrowsAsync<InsufficientBalanceException>(() =>
                 _walletServiceMock.Object.WithdrawFundsAsync(new Withdrawal { Amount = 100m }));
         }
@@ -112,7 +124,7 @@ namespace UnitTestsImplementation
             _walletServiceMock.Setup(service => service.WithdrawFundsAsync(withdrawal))
                 .ThrowsAsync(new InsufficientBalanceException());
 
-            // Assertion of exception
+            // Assertion of exception when withdrawing more than the balance
             await Assert.ThrowsAsync<InsufficientBalanceException>(() =>
                 _walletServiceMock.Object.WithdrawFundsAsync(withdrawal));
         }

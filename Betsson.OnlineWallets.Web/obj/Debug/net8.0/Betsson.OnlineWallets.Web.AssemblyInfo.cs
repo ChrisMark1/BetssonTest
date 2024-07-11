@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Betsson.OnlineWallets.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b218833be7f7bae5ca88a10c451a039610a1cfb9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87c7a296c68f491dfe8ad0c27baafbfc8340d526")]
 [assembly: System.Reflection.AssemblyProductAttribute("Betsson.OnlineWallets.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Betsson.OnlineWallets.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
